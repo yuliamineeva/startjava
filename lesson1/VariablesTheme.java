@@ -18,11 +18,11 @@ public class VariablesTheme {
         int penPrice = 100;
         int bookPrice = 200;
         int percent = 11;
-        int fullSumm = penPrice + bookPrice;
-        double discount = fullSumm * percent / 100;
-        double resultSumm = fullSumm - discount;
-        System.out.println("Общая стоимость товаров без скидки: " + fullSumm + "\nСумма скидки: " 
-                + discount + "\nОбщая стоимость товаров со скидкой: " + resultSumm);
+        int fullSum = penPrice + bookPrice;
+        double discount = fullSum * percent / 100;
+        double discountPrice = fullSum - discount;
+        System.out.println("Общая стоимость товаров без скидки: " + fullSum + "\nСумма скидки: " 
+                + discount + "\nОбщая стоимость товаров со скидкой: " + discountPrice);
 
         System.out.println("\n3. Вывод слова JAVA");
         System.out.println("   J    a  v     v  a       \n   J   a a  v   v  a a         "
@@ -61,44 +61,45 @@ public class VariablesTheme {
         System.out.println("Новые значения переменных: \nnum1 = " + num1 + "\nnum2 = " + num2);
 
         System.out.println("\n6. Вывод символов и их кодов");
-        char ch35 = '#';
-        char ch38 = '&';
-        char ch64 = '@';
-        char ch94 = '^';
-        char ch95 = '_';
-        System.out.printf("%d %c\n", (int) ch35, ch35);
-        System.out.printf("%d %c\n", (int) ch38, ch38);
-        System.out.printf("%d %c\n", (int) ch64, ch64);
-        System.out.printf("%d %c\n", (int) ch94, ch94);
-        System.out.printf("%d %c\n", (int) ch95, ch95);
+        char numberSign = '#';
+        char ampersand = '&';
+        char at = '@';
+        char caret = '^';
+        char underscore = '_';
+        System.out.printf("%d %c\n", (int) numberSign, numberSign);
+        System.out.printf("%d %c\n", (int) ampersand, ampersand);
+        System.out.printf("%d %c\n", (int) at, at);
+        System.out.printf("%d %c\n", (int) caret, caret);
+        System.out.printf("%d %c\n", (int) underscore, underscore);
 
         System.out.println("\n7. Вывод в консоль ASCII-арт Дюка");
-        char ch1 = '/';
-        char ch2 = '\\';
-        char ch3 = '_';
-        char ch4 = '(';
-        char ch6 = ')';
-        System.out.println("    " + ch1 +" "+ ch2 + "    ");
-        System.out.println("   " + ch1 + "   " + ch2 + "   ");
-        System.out.println("  " + ch1 + " " + ch3 + ch4 + " " +ch6 + ch2 + "  ");
-        System.out.println(" " + ch1 + "       " + ch2 + " ");
-        System.out.println("" + ch1 + ch3 + ch3 + ch3 + ch3 + ch3 + ch1 + ch2 + ch3 + ch3 + ch2);
+        char slash = '/';
+        char backslash = '\\';
+        char openParenthesis = '(';
+        char closeParenthesis = ')';
+        System.out.println("    " + slash +" "+ backslash);
+        System.out.println("   " + slash + "   " + backslash);
+        System.out.println("  " + slash + " " + underscore + openParenthesis + " "
+                + closeParenthesis + backslash);
+        System.out.println(" " + slash + "       " + backslash);
+        System.out.println("" + slash + underscore + underscore + underscore + underscore
+                + underscore + slash + backslash + underscore + underscore + backslash);
 
         System.out.println("\n8. Вывод количества сотен, десятков и единиц числа");
         int srcNum = 123;
         int hundred = srcNum / 100;
         int ten = (srcNum % 100) / 10;
-        int unit = srcNum % 10;
+        int ones = srcNum % 10;
         System.out.println("Число " + srcNum + " содержит:\n" + hundred + " сотен\n" + ten 
-                + " десятков\n" + unit + " единиц");
-        System.out.println("Сумма его цифр = " + (hundred + ten + unit));
-        System.out.println("Произведение = " + hundred * ten * unit);
+                + " десятков\n" + ones + " единиц");
+        System.out.println("Сумма его цифр = " + (hundred + ten + ones));
+        System.out.println("Произведение = " + (hundred * ten * ones));
 
         System.out.println("\n9. Вывод времени");
         srcNum = 86399;
-        int hours = srcNum / (60 * 60);
-        int minutes = srcNum / 60 - hours * 60;
-        int seconds = srcNum -  hours * 60 * 60 - minutes *60;
+        int hours = srcNum / 60 / 60;
+        int minutes = srcNum % 3600 / 60;
+        int seconds = srcNum % 60;
         System.out.println("ЧЧ:ММ:СС = " + hours + ":" + minutes + ":" + seconds);
     }
 }
