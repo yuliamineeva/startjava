@@ -150,78 +150,75 @@ public class IfElseStatementTheme {
 
         System.out.println("\n9.Подсчет количества банкнот");
         int amount = 567;
-        int hundred = 0;
-        int ten = 0;
-        int ones = 0;
-        int remainingHundred = 10;
-        int remainingTen = 5;
-        int remainingOnes = 50;
-        int needHundred = amount / 100;
-        int needTen = (amount % 100) / 10;
-        int needOnes = amount % 10;
-        boolean isNeedNextCheck = true;
+        int remaining100 = 10;
+        int remaining10 = 5;
+        int remaining1 = 50;
 
-        if (remainingHundred * 100 + remainingTen * 10 + remainingOnes < amount) {
+        if (remaining100 * 100 + remaining10 * 10 + remaining1 < amount) {
             System.out.println("Не хватает банкнот для выдачи нужной суммы");
-            isNeedNextCheck = false;
+            return;
         }
 
-        if (isNeedNextCheck && remainingOnes < needOnes) {
+        int need1 = amount % 10;
+        int banknote1 = 0;
+        if (remaining1 < need1) {
             System.out.println("Не хватает банкнот номиналом 1 USD для выдачи нужной суммы");
-            isNeedNextCheck = false;
+            return;
         } else {
-            remainingOnes -= needOnes;
-            ones = needOnes;
-            needOnes = 0;
+            remaining1 -= need1;
+            banknote1 = need1;
+            need1 = 0;
         }
 
-        if (isNeedNextCheck && needTen <= remainingTen) {
-            remainingTen -= needTen;
-            ten = needTen;
-            needTen = 0;
+        int need10 = (amount % 100) / 10;
+        int banknote10 = 0;
+        if (need10 <= remaining10) {
+            remaining10 -= need10;
+            banknote10 = need10;
+            need10 = 0;
         } else {
-            needTen -= remainingTen;
-            ten = remainingTen;
-            remainingTen = 0;
+            need10 -= remaining10;
+            banknote10 = remaining10;
+            remaining10 = 0;
         }
 
-        if (isNeedNextCheck && needTen * 10 > remainingOnes) {
+        if (need10 * 10 > remaining1) {
             System.out.println("Не хватает банкнот номиналом 10 USD и 1 USD для выдачи нужной " 
                     + "суммы");
-            isNeedNextCheck = false;
+            return;
         } else {
-            remainingOnes -= needTen * 10;
-            ones += needTen * 10;
-            needTen = 0;
+            remaining1 -= need10 * 10;
+            banknote1 += need10 * 10;
+            need10 = 0;
         }
 
-        if (isNeedNextCheck && needHundred <= remainingHundred) {
-            remainingHundred -= needHundred;
-            hundred = needHundred;
-            needHundred = 0;
+        int need100 = amount / 100;
+        int banknote100 = 0;
+        if (need100 <= remaining100) {
+            remaining100 -= need100;
+            banknote100 = need100;
+            need100 = 0;
         } else {
-            needHundred -= remainingHundred;
-            hundred = remainingHundred;
-            remainingHundred = 0;
+            need100 -= remaining100;
+            banknote100 = remaining100;
+            remaining100 = 0;
         }
 
-        if (isNeedNextCheck && needHundred * 10 <= remainingTen) {
-            remainingTen -= needHundred * 10;
-            ten +=  needHundred * 10;
-            needHundred = 0;
+        if (need100 * 10 <= remaining10) {
+            remaining10 -= need100 * 10;
+            banknote10 +=  need100 * 10;
+            need100 = 0;
         } else {
-            ten += remainingTen;
-            ones = ones + needHundred * 100 - remainingTen * 10;
-            remainingOnes = remainingOnes - (needHundred * 100 - remainingTen * 10);
-            needHundred = 0;
-            remainingTen = 0;
+            banknote10 += remaining10;
+            banknote1 = banknote1 + need100 * 100 - remaining10 * 10;
+            remaining1 = remaining1 - (need100 * 100 - remaining10 * 10);
+            need100 = 0;
+            remaining10 = 0;
         }
-        
-        if (isNeedNextCheck) {
-            System.out.printf("Выдана сумма %d USD.\nНоминал банкнот: 100 USD, требуемое"
-                    + " количество: %d шт.\nНоминал банкнот: 10 USD, требуемое количество: %d шт."
-                    + "\nНоминал банкнот: 1 USD, требуемое количество: %d шт.\n", amount, hundred,
-                    + ten, ones);
-        }
+
+        System.out.printf("Выдана сумма %d USD.\nНоминал банкнот: 100 USD, требуемое"
+                + " количество: %d шт.\nНоминал банкнот: 10 USD, требуемое количество: %d шт."
+                + "\nНоминал банкнот: 1 USD, требуемое количество: %d шт.\n", amount, banknote100,
+                + banknote10, banknote1);
     }
 }
